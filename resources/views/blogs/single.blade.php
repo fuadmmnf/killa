@@ -21,10 +21,10 @@
     <meta property="fb:app_id" content="163879201229487">
     <meta property="og:type" content="article">
     <!-- Open Graph - Article -->
-    <meta name="article:section" content="{{ $blog->category->name }}">
+    <meta name="article:section" content="{{ $blog->blogcategory->name }}">
     <meta name="article:published_time" content="{{ $blog->created_at}}">
     <meta name="article:author" content="{{ Request::url('blogger/profile/'.$blog->user->unique_key) }}">
-    <meta name="article:tag" content="{{ $blog->category->name }}">
+    <meta name="article:tag" content="{{ $blog->blogcategory->name }}">
     <meta name="article:modified_time" content="{{ $blog->updated_at}}">
 @endsection
 
@@ -72,7 +72,7 @@
                     <h2 class="blog-details-headline text-black">{{ $blog->title }}</h2>
                     <!-- end post title  -->
                     <!-- post date and categories  -->
-                    <div class="blog-date no-padding-top">Posted by <a href="{{ route('blogger.profile', $blog->user->unique_key) }}"><b>{{ $blog->user->name }}</b></a> | {{ date('F d, Y', strtotime($blog->created_at)) }} | <a href="{{ route('blog.categorywise', $blog->category->name) }}">{{ $blog->category->name }}</a> </div>
+                    <div class="blog-date no-padding-top">Posted by <a href="{{ route('blogger.profile', $blog->user->unique_key) }}"><b>{{ $blog->user->name }}</b></a> | {{ date('F d, Y', strtotime($blog->created_at)) }} | <a href="{{ route('blog.categorywise', $blog->blogcategory->name) }}">{{ $blog->blogcategory->name }}</a> </div>
                     <!-- end date and categories   -->
                     <!-- post image -->
                     @if($blog->featured_image != null)
@@ -171,7 +171,7 @@
                         <h5 class="widget-title">Blog Comments</h5>
                         <div class="row">
                             <div class="col-md-12">
-                                
+
                             </div>
                         </div>
                     </div>
@@ -216,7 +216,7 @@
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div> --}}
           </div>
-          
+
         </div>
     </div>
 @endsection

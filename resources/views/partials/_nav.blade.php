@@ -33,7 +33,7 @@
                         <li>
                             <a href="{{ route('index.index') }}" class="inner-link">Home</a>
                         </li>
-                        
+
                         <li>
                             <a href="{{ route('index.about') }}" class="inner-link">About Us</a>
                         </li>
@@ -54,6 +54,9 @@
                                     <a href="{{ route('index.disasterdata') }}"><i class="icon-cloud i-plain"></i> Data</a>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="{{ route('blogs.index') }}">Blog</a>
                         </li>
                         <li>
                             <a href="{{ route('index.contact') }}">Contact</a>

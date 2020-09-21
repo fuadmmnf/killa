@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-10 col-sm-10 col-xs-11 center-col login-box">
                     <h1 style="text-align: center">Create New Blog</h1>
-                    @if(Auth::user()->payment_status == 0)
+                    @if(Auth::user()->activation_status == 0)
                       <br/>
                       <br/>
                       <center><h4 class="">After the successfull payment, you will get access to your blogger profile to create blogs and stuffs!</h4></center>
@@ -28,7 +28,7 @@
                             <input type="text" name="title" id="title" placeholder="Title of the Post" required="">
                         </div>
                         <div class="form-group no-margin-bottom">
-                            <select name="category_id" required="">
+                            <select name="blogcategory_id" required="">
                                 <option value="" selected="" disabled="">Category</option>
                                 @foreach($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -61,7 +61,7 @@
 
 @section('js')
     <script type="text/javascript" src="{{ asset('vendor/summernote/summernote.min.js') }}"></script>
-    
+
     <script>
         $(document).ready(function(){
             $('.summernote').summernote({

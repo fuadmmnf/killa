@@ -16,6 +16,7 @@ class CreatePublicationsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('code');
+            $table->integer('status');
             $table->string('publishing_date');
             $table->string('file')->nullable();
             $table->string('image')->nullable();

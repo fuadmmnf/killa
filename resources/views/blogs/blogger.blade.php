@@ -63,9 +63,9 @@
           <!-- post item -->
           @php $counter = 1; @endphp
           @foreach($blogger->blogs as $blog)
-          <div class="col-md-6 col-sm-6 col-xs-6 blog-listing wow fadeInUp" 
+          <div class="col-md-6 col-sm-6 col-xs-6 blog-listing wow fadeInUp"
           @if($counter%2 == 0)
-          data-wow-duration="600ms" 
+          data-wow-duration="600ms"
           @else
           data-wow-duration="300ms"
           @endif
@@ -76,8 +76,8 @@
               </div>
               @endif
               <div class="blog-details">
-                  <div class="blog-date">{{ date('F d, Y', strtotime($blog->created_at)) }} | 
-                    <a href="{{ route('blog.categorywise', $blog->category->name) }}">{{ $blog->category->name }}</a>
+                  <div class="blog-date">{{ date('F d, Y', strtotime($blog->created_at)) }} |
+                    <a href="{{ route('blog.categorywise', $blog->blogcategory->name) }}">{{ $blog->blogcategory->name }}</a>
                   </div>
                   <div class="blog-title"><a href="{{ route('blog.single', $blog->slug) }}">
                     {{ $blog->title }}
@@ -112,7 +112,7 @@
                                 }
                             },
                             error: function(data) {
-                              
+
                             }
                         });
                     </script>
@@ -133,5 +133,5 @@
 @endsection
 
 @section('js')
-   
+
 @endsection

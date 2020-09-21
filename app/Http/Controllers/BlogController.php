@@ -15,7 +15,7 @@ use DB, Hash, Auth, Image, File, Session;
 use Purifier;
 
 class BlogController extends Controller {
-    
+
     public function __construct()
     {
         $this->middleware('auth')->except('index', 'getBloggerProfile', 'getBlogPost', 'checkLikeAPI', 'getCategoryWise', 'getMonthWise');
@@ -61,7 +61,7 @@ class BlogController extends Controller {
         $this->validate($request,array(
             'title'          => 'required|max:255|unique:blogs,title',
             'body'           => 'required',
-            'category_id'    => 'required|integer',
+            'blogcategory_id'    => 'required|integer',
             'featured_image' => 'sometimes|image|max:300'
         ));
 
@@ -70,9 +70,9 @@ class BlogController extends Controller {
         $blog->title       = $request->title;
         $blog->user_id     = Auth::user()->id;
         $blog->slug        = str_replace(['?',':', '\\', '/', '*', ' '], '_',$request->title).time();
-        $blog->category_id = $request->category_id;
+        $blog->blogcategory_id = $request->blogcategory_id;
         $blog->body        = Purifier::clean($request->body, 'youtube');
-        
+
         // image upload
         if($request->hasFile('featured_image')) {
             $image      = $request->file('featured_image');
@@ -100,7 +100,7 @@ class BlogController extends Controller {
 
     public function getBlogPost($slug)
     {
-        $categories = Category::all();
+        $categories = Blogcategory::all();
         $blog = Blog::where('slug', $slug)->first();
         $populars = Blog::orderBy('likes', 'desc')->get()->take(4);
         $archives = DB::table('blogs')
@@ -204,14 +204,14 @@ class BlogController extends Controller {
     }
 
     public function getCategoryWise($name) {
-        $categories = Category::all();
+        $categories = Blogcategory::all();
         $populars = Blog::orderBy('likes', 'desc')->get()->take(4);
         $archives = DB::table('blogs')
                         ->select("created_at", DB::raw('count(*) as total'))
                         ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m')"))
                         ->orderBy('created_at', 'DESC')
                         ->get();
-        $category = Category::where('name', $name)->first();
+        $category = Blogcategory::where('name', $name)->first();
         $blogs = Blog::where('category_id', $category->id)->orderBy('id', 'desc')->paginate(7);
         return view('blogs.categorywise')
                   ->withName($name)
@@ -222,7 +222,7 @@ class BlogController extends Controller {
     }
 
     public function getMonthWise($date) {
-        $categories = Category::all();
+        $categories = Blogcategory::all();
         $populars = Blog::orderBy('likes', 'desc')->get()->take(4);
         $archives = DB::table('blogs')
                         ->select("created_at", DB::raw('count(*) as total'))
